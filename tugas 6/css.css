@@ -1,0 +1,63 @@
+body{
+	background: rgb(23,27,31);
+}
+#sampul{
+	background-image: url(img/Udayana-Uni.jpg);
+    width:720px;
+    min-height:250px;
+    background-size:cover;
+}
+.judul{
+	height:auto;
+    width:auto;
+    float:right;
+    text-shadow: 2px 2px 5px grey;
+    color: rgb(190,223,242);
+}
+#header {
+    width:720px;
+    height:50px;
+    margin-top:10px;
+}
+.ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	background-color: darkslategray;
+}
+.li{
+	float: left;
+	border-right: 1px solid black;
+}
+.a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+.a:hover:not(.active) {
+	background-color: darkseagreen;
+	
+}
+#konten{
+	/*text-decoration-color: white;*/
+	color: grey;
+	text-shadow: 2px 2px 5px black;
+	width: 720px;
+}
+#footer { 
+    margin-top:10px;
+    /*width:980px;*/
+    height:100px;
+    background-color:rgb(42,52,61);
+    border-radius: 10px;
+}
+.text-footer {
+    text-align: center;
+    /*color: #ffffff;*/
+}
+.separate{
+	font-size: 35px;
+}
