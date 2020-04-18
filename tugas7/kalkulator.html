@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.btn{
+			width: 70px;
+			height: 70px;
+			font-size: 25px;
+		}
+		#p{
+			font-size: 30px;
+		}
+		#eq{
+			width: 144px;
+			height: 70px;
+			font-size: 25px;
+		}
+	</style>
+	<script type="text/javascript">
+		var tense='';
+		var suku='';
+		var sukus=[];
+		var arit=['+','-','×','÷'];
+		var upp=['×','÷'];
+		var op=[];
+		function clr(){
+			tense='';
+			document.getElementById('p').innerHTML='0';
+		}
+		function back(){//backspace
+			if(tense.length>0){//just to make the p isnt gonna disapear when the input length is 0
+				tense=tense.slice(0,(tense.length-1));
+				if (tense.length>0) {
+					document.getElementById('p').innerHTML=tense;
+				}
+				else {
+					document.getElementById('p').innerHTML='0';
+				}	
+			}
+		}
+		function inp(gg){//input
+			var x=tense.length-1;
+			x=tense.charAt(x);
+			x=arit.includes(x);
+			if (x&&arit.includes(gg)) {//if the last character of input is operator & also the new input,
+				//that operator will be switched with the new one
+				tense=tense.slice(0,tense.length-1);
+			}
+			tense=tense.concat(gg);
+			document.getElementById("p").innerHTML = tense;
+		}
+		function calc(){
+			if(arit.includes(tense.charAt(tense.length-1))){//delete the last character if it was an operator
+				tense=tense.slice(0,tense.length-1);
+			}
+			suku=tense.charAt(0);
+			for (var i = 1; i < tense.length; i++) {//parsing the number with the operators
+				if(arit.includes(tense.charAt(i))){
+					suku=parseFloat(suku);
+					sukus.push(suku);//put those numbers into an array
+					suku='';
+					op.push(tense.charAt(i));//put the operators into different array
+				}
+				else{
+					suku=suku.concat(tense.charAt(i));
+					
+				}
+			}
+			suku=parseFloat(suku);
+			sukus.push(suku);
+			suku='';
+			tense='';
+			var temp=[];
+			i=0;
+			while(i<=op.length) {// × & ÷ operation first
+				switch(op[i]){
+					case '×':
+						sukus[i]=sukus[i]*sukus[i+1];
+						op.splice(i,1);
+						sukus.splice(i+1,1);
+					break;
+					case '÷':
+						sukus[i]=sukus[i]/sukus[i+1];
+						op.splice(i,1);
+						sukus.splice(i+1,1);
+					break;
+					default:
+						i++;
+				}
+			}
+			i=0;
+			while(i<=op.length) {//and then + & -
+				switch(op[i]){
+					case '+':
+						sukus[i]=sukus[i]+sukus[i+1];
+						op.splice(i,1);
+						sukus.splice(i+1,1);
+					break;
+					case '-':
+						sukus[i]=sukus[i]-sukus[i+1];
+						op.splice(i,1);
+						sukus.splice(i+1,1);
+					break;
+					default:
+						i++;
+				}
+			}
+			document.getElementById('p').innerHTML=""+sukus;//show the result
+			sukus=[];
+			op=[];
+		}
+	</script>
+</head>
+<body>
+	<center>
+		<p>kalkulator support kalkulasi lebih dari 2 bilangan input sekaligus</p>
+		<p id="p">0</p>
+		<table>
+			<tr>
+				<td>
+					<button class='btn' onclick='clr()'>AC</button>
+				</td>
+				<td>
+					<button class='btn' onclick='back()'>←</button>
+				</td>
+				<td colspan="2">
+					<button id='eq' onclick='calc()'>=</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button class='btn' onclick='inp(7)'>7</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(8)'>8</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(9)'>9</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp("÷")'>÷</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button class='btn' onclick='inp(4)'>4</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(5)'>5</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(6)'>6</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp("×")'>×</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button class="btn" onclick="inp(1)">1</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(2)'>2</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(3)'>3</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp("-")'>-</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button class='btn' onclick='inp("00")'>00</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(0)'>0</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp(".")'>.</button>
+				</td>
+				<td>
+					<button class='btn' onclick='inp("+")'>+</button>
+				</td>
+			</tr>
+		</table>
+	</center>
+</body>
+</html>
