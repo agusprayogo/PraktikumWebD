@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Java Script 2</title>
+		<!-- <style>
+			h3
+			{
+				height: 48px;
+				width: 25%;
+				font-weight: bold;
+				color: black;
+				background-color: #BEF0FA;
+				text-align: center;
+				margin: auto;
+				border-color: #F4F4EB;;
+				border-radius: 15px;
+			}
+			fieldset
+			{
+				width: 600px;
+				height: auto;
+				margin: auto;
+				color: black;
+				background-color: #7CFC00;
+				border-color: #F4F4EB;;
+				border-radius: 15px;
+			}	
+		</style> -->
+		<script type="text/javascript">
+			function tambah()
+			{              
+				var table = document.getElementById('tampil');
+				var form = document.forms['js2'];
+				var TambahBaris = table.rows.length;
+				var baris = table.insertRow(TambahBaris);                
+				var a = baris.insertCell(0);
+				var del = document.createElement("button");
+				// del.onclick=deleteRow(this.rows);
+				del.innerHTML='hapus';
+				a.appendChild(del);
+				var c = baris.insertCell(1);
+				c.innerHTML = form.elements['data'].value;
+				document.getElementById('js2').reset();
+				   
+			}
+			function hapus(tableID)
+			{
+				if(confirm("Apakah Anda Yakin Ingin Menghapus Yang Di Tandai?"))
+				{
+					try
+					{
+						var table = document.getElementById(tableID);
+						var TambahBaris = table.rows.length;
+						for (var i = 1; i < TambahBaris; i++)
+						{
+							var baris = table.rows[i];
+							var centang = baris.cells[0].childNodes[0];
+							if (null != centang && true == centang.checked)
+							{
+								table.deleteRow(i);
+								TambahBaris--;
+								i--;
+							}
+						}
+					}
+					catch(e) 
+					{
+						alert(e);
+					}
+				}
+			}
+			function tanda(source)
+			{
+				checkboxes = document.getElementsByName('centang');
+				for(var i=0, n=checkboxes.length;i<n;i++)
+				{
+					checkboxes[i].checked = source.checked;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<form align='center' id="js2" name="mainForm" onsubmit="return checkForm()">
+			<h1>To-do List</h1>
+			<label>Agus Prayogo</label><br>
+			<label>NIM. 1708561079</label><br><br>
+			<input type="text" id="data" placeholder="to-do list" />
+			<input type="button" value="Tambah" id="add" onclick="tambah('js2','tampil')"/>
+			<table id="tampil" width="auto" align="center" cellpadding="2">
+			<!-- <legend><b>Tampilan</b></legend> -->
+				<!-- <tr>
+					<td><input type="checkbox" onclick="tanda(this)"/></td>
+					<td><b><center>No.</center></b></td>
+					<td><b><center>K</center></b></td>
+				</tr> -->
+			</table>
+		
+		</form>
+	</body>
+</html>
