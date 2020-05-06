@@ -46,7 +46,7 @@
 			$str=$str.' where nama like "%'.$_POST['namamahasiswa'].'%"';
 		}
 		if (isset($_POST['filmahasiswa'])) {
-			$str=$str.' order by "'.$_POST['filmahasiswa'].'"';
+			$str=$str.' order by '.$_POST['filmahasiswa'].'';
 		}
 		echo 'select * from mahasiswa'.$str;
 		$result = $conn->query('select * from mahasiswa'.$str);
